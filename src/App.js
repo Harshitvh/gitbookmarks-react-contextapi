@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React,{useState,useEffect} from 'react';
+import 'materialize-css/dist/css/materialize.min.css'
+import M from 'materialize-css/dist/js/materialize.min.js'
+import Navbar from './components/layouts/Navbar';
+import Repos from './components/Repos/Repos';
+import RepoState from './context/Repository/RepoState';
+import BookMarks from './components/Bookmarks/BookMarks';
+import BookMarkState from './context/BookMarks/BookMarkState';
 function App() {
+  const [state, setstate] = useState(null)
+  useEffect(()=>{
+    M.AutoInit();
+  },[])
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <RepoState>
+      <BookMarkState>
+    <div>
+      <Navbar></Navbar>
+    <div  className="row">
+      <div className="col s7">
+        <Repos></Repos>
+      </div>
+      <div  className="col s5">
+        <BookMarks style ={{"positon":"relative"}}/>
+      </div>
     </div>
+    </div>
+    </BookMarkState>
+    </RepoState>
   );
 }
 
