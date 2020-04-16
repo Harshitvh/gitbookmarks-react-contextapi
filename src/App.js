@@ -1,36 +1,45 @@
-import React,{useState,useEffect} from 'react';
-import 'materialize-css/dist/css/materialize.min.css'
-import M from 'materialize-css/dist/js/materialize.min.js'
-import Navbar from './components/layouts/Navbar';
-import Repos from './components/Repos/Repos';
-import RepoState from './context/Repository/RepoState';
-import BookMarks from './components/Bookmarks/BookMarks';
-import BookMarkState from './context/BookMarks/BookMarkState';
+import React, { useState, useEffect, useContext } from "react";
+import "materialize-css/dist/css/materialize.min.css";
+import M from "materialize-css/dist/js/materialize.min.js";
+import Navbar from "./components/layouts/Navbar";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Repos from "./components/Repos/Repos";
+import RepoState from "./context/Repository/RepoState";
+import BookMarks from "./components/Bookmarks/BookMarks";
+import BookMarkState from "./context/BookMarks/BookMarkState";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import AuthState from "./context/Auth/AuthState";
+import AuthContext from "./context/Auth/AuthContext";
+import LogOut from "./pages/LogOutPage";
+import LogOutPage from "./pages/LogOutPage";
 function App() {
-  const [state, setstate] = useState(null)
-  useEffect(()=>{
+  const authContext = useContext(AuthContext);
+  useEffect(() => {
     M.AutoInit();
-  },[])
-
-
-
+  }, []);
 
   return (
-    <RepoState>
-      <BookMarkState>
-    <div>
-      <Navbar></Navbar>
-    <div  className="row">
-      <div className="col s7">
-        <Repos></Repos>
-      </div>
-      <div  className="col s5">
-        <BookMarks style ={{"positon":"relative"}}/>
-      </div>
-    </div>
-    </div>
-    </BookMarkState>
-    </RepoState>
+    <BrowserRouter>
+      <RepoState>
+        <BookMarkState>
+          <AuthState>
+            <Switch>
+              <Route exact path="/home" component={Home}></Route>
+              <Route exact path="/" component={Login}></Route>
+              <Route exact path="/logout" component={LogOutPage}></Route>
+              <Route
+                render={() => (
+                  <div>
+                    <h3>Page Not Found</h3>
+                  </div>
+                )}
+              />
+            </Switch>
+          </AuthState>
+        </BookMarkState>
+      </RepoState>
+    </BrowserRouter>
   );
 }
 
