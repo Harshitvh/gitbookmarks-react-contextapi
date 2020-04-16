@@ -17,7 +17,6 @@ const BookMarkState = (props) => {
           password: localStorage.getItem("password"),
         },
       });
-      console.log(res);
       let act = [];
       if (res.status == 200) {
         act = await res.json();
@@ -27,7 +26,6 @@ const BookMarkState = (props) => {
         payload: act,
       });
     } catch (err) {
-      console.error(err);
     }
   };
 

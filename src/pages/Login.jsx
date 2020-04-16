@@ -3,9 +3,10 @@ import AuthContext from "./../context/Auth/AuthContext";
 import { useEffect } from "react";
 const Login = (props) => {
   const [loginClick, setLoginClick] = useState(false);
+  const [registerClick, setRegisterClick] = useState(false);
+
   const authContext = useContext(AuthContext);
   useEffect(() => {
-    console.log("use effect");
     const user = {
       name: localStorage.getItem("name"),
       password: localStorage.getItem("password"),
@@ -40,17 +41,23 @@ const Login = (props) => {
   const onLogin = () => {
     setLoginClick(true);
     authContext.login(login);
-    console.log("sss" + authContext.isAuth);
   };
 
   const onRegister = () => {
-    console.log(register);
+    setRegisterClick(true);
     authContext.register(register);
   };
 
   return (
     <div className="row container">
       <div style={{ position: "relative", top: "30px" }} className="col s6">
+      <div>
+          {null !== authContext.alert && registerClick  ? (
+            <h3 style={{ fontSize: "1.5rem" }}>User Already Exists</h3>
+          ) : (
+            ""
+          )}
+        </div>
         <h3 style={{ fontSize: "1.5rem" }}>Please Register</h3>
 
         <form>

@@ -29,7 +29,6 @@ const AuthState = (props) => {
           password: user.password,
         },
       });
-      console.log(abc.status);
       if (abc.status !== 200) {
         dispatch({
           type: SET_ALERT,
@@ -43,7 +42,6 @@ const AuthState = (props) => {
         });
       }
     } catch (err) {
-      console.log(err);
       dispatch({
         type: SET_ALERT,
       });
@@ -60,7 +58,6 @@ const AuthState = (props) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(abc.status);
       if (abc.status !== 200) {
         dispatch({
           type: SET_ALERT,
@@ -74,7 +71,6 @@ const AuthState = (props) => {
         });
       }
     } catch (err) {
-      console.log(err);
       dispatch({
         type: SET_ALERT,
       });

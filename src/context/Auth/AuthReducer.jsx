@@ -5,6 +5,7 @@ export default (state, action) => {
       return {
         ...state,
         isAuth: false,
+        alert: null,
         user: null,
       };
     }
@@ -12,6 +13,7 @@ export default (state, action) => {
       return {
         ...state,
         isAuth: true,
+        alert: null,
         user: action.payload,
       };
     }
